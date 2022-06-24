@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { AddComment, AddToBasket, BuyOrder, DeleteComments, EditComments, DeleteBuy } from '../store/CreateStore';
 import { useAppDispatch, useAppSelector } from './../store/state';
 import Forms from './Forms';
+import Footer from './Footer';
 var settings = {
    dots: false,
    infinite: true,
@@ -22,16 +23,16 @@ var settings = {
          breakpoint: 1024,
          settings: {
             slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
+            slidesToScroll: 1,
+            initialSlide: 0,
          }
       },
       {
          breakpoint: 600,
          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            initialSlide: 0
          }
       },
       {
@@ -153,29 +154,55 @@ const ProductFull: FC = () => {
                      <div className="wrapper">
                         <div className="products">
                            <Slider {...settings}>
-                              {product.filter((item) => item.category.includes(category)
-                              ).filter((item) => item.id !== id).map((item: any) => {
-                                 const { id, image } = item;
-                                 return (
-                                    <div className="product" key={id}>
-                                       <div className="choise_product">
-                                          <div className="blocks">
-                                             <div className="block">
-                                                <p onClick={() => dispatch(AddToBasket(item))}>🛒</p>
+                              {product.filter((item) => item.category.includes(category)).length > 3 ?
+                                 (product.filter((item) => item.category.includes(category)
+                                 ).filter((item) => item.id !== id)
+                                    .map((item: any) => {
+                                       const { id, image } = item;
+                                       return (
+                                          <div className="product" key={id}>
+                                             <div className="choise_product">
+                                                <div className="blocks">
+                                                   <div className="block">
+                                                      <p onClick={() => dispatch(AddToBasket(item))}>🛒</p>
+                                                   </div>
+                                                   <div className="block">
+                                                      <Link to={`/productFull/:${id}`}
+                                                         onClick={() => window.scrollTo(0, 0)}>
+                                                         <p>🔍</p>
+                                                      </Link>
+                                                   </div>
+                                                </div>
                                              </div>
-                                             <div className="block">
-                                                <Link to={`/productFull/:${id}`}
-                                                   onClick={() => window.scrollTo(0, 0)}>
-                                                   <p>🔍</p>
-                                                </Link>
-                                             </div>
+                                             <img src={image} alt="" />
                                           </div>
-                                       </div>
-                                       <img src={image} alt="" />
-                                    </div>
-                                 )
+                                       )
+                                    }
+                                    )) :
+                                 (product.filter((item) => item.id !== id)
+                                    .map((item: any) => {
+                                       const { id, image } = item;
+                                       return (
+                                          <div className="product" key={id}>
+                                             <div className="choise_product">
+                                                <div className="blocks">
+                                                   <div className="block">
+                                                      <p onClick={() => dispatch(AddToBasket(item))}>🛒</p>
+                                                   </div>
+                                                   <div className="block">
+                                                      <Link to={`/productFull/:${id}`}
+                                                         onClick={() => window.scrollTo(0, 0)}>
+                                                         <p>🔍</p>
+                                                      </Link>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <img src={image} alt="" />
+                                          </div>
+                                       )
+                                    }
+                                    ))
                               }
-                              )}
                            </Slider>
                         </div>
                      </div>
@@ -189,33 +216,44 @@ const ProductFull: FC = () => {
                      <div className="comment">
                         <h1 className='titles'>Comments</h1>
                         <div className="commets_main">
-                           {comment?.map((item: any) => {
-                              const { name, date, id, description } = item;
-                              return (
-                                 <div>
-                                    <div className="comment_block" key={id}>
-                                       <div className="comment_block_img">
-                                          <img src="https://nulltx.com/wp-content/uploads/2018/11/anonymous-cryptocurrency-1068x709.jpg" alt="" />
-                                          <p>{name}</p>
-                                       </div>
-                                       <div className="Date">
-                                          <p>{date.toLocaleTimeString()}</p>
-                                       </div>
-                                       <div className="comment_block_text">
-                                          <p>{description}</p>
-                                       </div>
-                                       <div className="buttons" style={editId === item.date ? { opacity: 0 } : { opacity: 1 }}>
-                                          <button onClick={() => handleEdit(item, date)}>Edit</button>
-                                          <button onClick={() => DeleteComment(item)}>Delete</button>
+
+
+                           {comment?.length === 0 ? (
+                              <div className='not_comment'
+                              >
+                                 <h1>Not comment</h1>
+                              </div>
+                           ) : (<>
+                              {comment?.map((item: any) => {
+                                 const { name, date, id, description } = item;
+                                 return (
+                                    <div>
+                                       <div className="comment_block" key={id}>
+                                          <div className="comment_block_img">
+                                             <img src="https://nulltx.com/wp-content/uploads/2018/11/anonymous-cryptocurrency-1068x709.jpg" alt="" />
+                                             <p>{name}</p>
+                                          </div>
+                                          <div className="Date">
+                                             <p>{date.toLocaleTimeString()}</p>
+                                          </div>
+                                          <div className="comment_block_text">
+                                             <p>{description}</p>
+                                          </div>
+                                          <div className="buttons" style={editId === item.date ? { opacity: 0 } : { opacity: 1 }}>
+                                             <button onClick={() => handleEdit(item, date)}>Edit</button>
+                                             <button onClick={() => DeleteComment(item)}>Delete</button>
+                                          </div>
                                        </div>
                                     </div>
-                                 </div>
-                              )
-                           })}
+                                 )
+                              })}
+                           </>)}
                         </div>
                         <div className="inputs_register">
                            <div className="input_register">
-                              <button onClick={() => setBoolName(true)}>Register</button>
+                              <button
+                                 className='register_button'
+                                 onClick={() => setBoolName(true)}>Register</button>
                            </div>
                            <div className="input_btn">
                               <span>{value.length}/300</span>
@@ -226,7 +264,6 @@ const ProductFull: FC = () => {
                                  placeholder="Comment..." />
                               {edit === false ? <button onClick={() => handleSendComment(id)}>Send</button> :
                                  <button onClick={() => handleSaveComment(index.id)}>Save</button>}
-
                            </div>
                         </div>
                      </div>
@@ -256,6 +293,7 @@ const ProductFull: FC = () => {
             )
          }
 
+         < Footer />
       </div >
    )
 }

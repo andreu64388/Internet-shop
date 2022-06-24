@@ -86,8 +86,9 @@ const FirstPage: FC<FirstTS> = ({ FuncDissabled }) => {
    }, [name, surname, age, mobile, gmail, password])
    return (
       <div className="form_pages">
-         <div className="block">
+         <div className="block choise">
             <h1>Name</h1>
+
             <input
                type="text"
                placeholder="Enter your name"
@@ -110,7 +111,7 @@ const FirstPage: FC<FirstTS> = ({ FuncDissabled }) => {
             />
             <div></div>
          </div>
-         <div className="block">
+         <div className="block choise">
             <h1>Mobile Number </h1>
             <input
                type="phone"

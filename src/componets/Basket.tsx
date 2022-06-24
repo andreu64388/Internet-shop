@@ -1,10 +1,14 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppSelector } from './../store/state';
 import { useDispatch } from 'react-redux';
 import { AddToBasket, BuyOrder, DeleteBuy, DeleteToBasket } from '../store/CreateStore';
 import Forms from './Forms';
+import Footer from './Footer';
 const Basket: FC = () => {
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, []);
    const { basket, sum } = useAppSelector(state => state.data);
    const dispatch = useDispatch();
    const [FormBool, setFormBool] = useState<boolean>(false)
@@ -14,7 +18,6 @@ const Basket: FC = () => {
    }
    const handleBuyOrder = (basket: any) => {
       setFormBool(true)
-      
    }
    return (
       <div
@@ -68,8 +71,8 @@ const Basket: FC = () => {
                {FormBool && <Forms changeBool={changeBool} cost={sum} />}
             </>
          )}
+         <Footer />
       </div>
    )
 }
-
 export default Basket

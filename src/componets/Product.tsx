@@ -1,8 +1,9 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react'
-import { useAppSelector, useAppDispatch, } from './../store/state';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { checkbox } from '../assests/assets';
 import { AddToBasket } from '../store/CreateStore';
-import { checkbox, checkboxTS } from '../assests/assets';
+import { useAppDispatch, useAppSelector } from './../store/state';
+import Footer from './Footer';
 const Product: FC = () => {
    const { product } = useAppSelector(state => state.data);
    const dispatch = useAppDispatch()
@@ -14,15 +15,13 @@ const Product: FC = () => {
    const [filter, setFilter] = useState<any | string>(product)
    const [change, setChange] = useState<any[]>(checkbox);
    const [option, setOption] = useState<any[]>(product);
-   const [edit, setEdit] = useState<boolean>(false)
-
-
-
-
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, []);
    useEffect(() => {
       if (change.map(item => item.checked).includes(true)) {
          const productNew =
-            option.map((item: any) => {
+            option.map((item: any): any => {
                if (change.filter(item => item.checked).map(item => item.color).includes(item.color)) {
                   return item;
                }
@@ -47,14 +46,15 @@ const Product: FC = () => {
          const newProduct = [...products].sort((a: any, b: any) => b[result] - a[result])
          setProducts(newProduct)
       }
+      else {
+         setProducts(product)
+      }
    }
    const Filter = (valueOfFilter: string | any) => {
       setFilter(valueOfFilter)
       if (valueOfFilter === product) {
          setProducts(product)
          setOption(product)
-
-
       }
       else {
          const NewDate = product.filter((item: any) => item.category === valueOfFilter);
@@ -77,6 +77,9 @@ const Product: FC = () => {
       else if (value === "descending") {
          const newProduct = [...products].sort((a: any, b: any) => b[result] - a[result])
          setProducts(newProduct)
+      }
+      else {
+         setProducts(product)
       }
    }
    const handlerChangeCheckbox = (index: number) => {
@@ -101,6 +104,19 @@ const Product: FC = () => {
          const newProduct = [...products].sort((a: any, b: any) => b[result] - a[result])
          setProducts(newProduct)
       }
+      else {
+         setProducts(product)
+      }
+   }
+   const ResetAllFilters = () => {
+      setSortPrice("");
+      setSortYear("");
+      setSortSale("");
+      setResearch("")
+      setChange(checkbox);
+      setProducts(product)
+      setOption(product)
+      setFilter(product);
    }
    return (
       <div
@@ -155,23 +171,29 @@ const Product: FC = () => {
                         style={filter === "book" ? { background: "black", color: "white" } : {}}
                         onClick={() => Filter("book")} >Book</button>
                   </div>
-                  <h1>Выбор по цвету</h1>
-                  {checkbox.map((index, i) => {
-                     return (
-                        <p className='check'>
-                           <input type="checkbox"
-                              id={index.color}
-                              key={i}
-                              checked={change[i].checked}
-                              onChange={() => handlerChangeCheckbox(i)} />
-                           <label htmlFor={index.color}>
-                              <p className={change[i].checked ? 'circle active' : 'circle'}
-                                 style={{ background: index.color }}
-                              >
-                              </p></label>
-                        </p>
-                     );
-                  })}
+                  <h1>Сolor selection</h1>
+                  <div className="colors">
+                     {checkbox.map((index, i) => {
+                        return (
+                           <p className='check'>
+                              <input type="checkbox"
+                                 id={index.color}
+                                 key={i}
+                                 checked={change[i].checked}
+                                 onChange={() => handlerChangeCheckbox(i)} />
+                              <label htmlFor={index.color}>
+                                 <p className={change[i].checked ? 'circle active' : 'circle'}
+                                    style={{ background: index.color }}
+                                 >
+                                 </p></label>
+                           </p>
+                        );
+                     })}
+                  </div>
+                  <button className='reset'
+                     onClick={ResetAllFilters} >
+                     Reset all filters
+                  </button>
                </div>
                <div className="products">
                   {products.filter((n: any) => {
@@ -205,6 +227,7 @@ const Product: FC = () => {
                </div>
             </div>
          </div >
+         <Footer />
       </div >
    )
 }

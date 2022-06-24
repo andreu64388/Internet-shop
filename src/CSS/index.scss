@@ -98,8 +98,8 @@ a {
       .burger {
         display: block;
         #nav-icon1 {
-          width: 45px;
-          height: 45px;
+          width: 40px;
+          height: 40px;
           position: relative;
           margin: 30px auto;
           transform: rotate(0deg);
@@ -299,11 +299,12 @@ a {
 }
 .products__input {
   margin: 20px auto;
+
   display: flex;
-  height: 400px;
 
   gap: 40px;
   .input {
+    height: 400px;
     max-width: 300px;
     width: 100%;
     box-shadow: 0px 0px 10px 0px gray;
@@ -321,6 +322,12 @@ a {
       border: 1px solid black;
       font-size: 16px;
     }
+    .colors {
+      display: grid;
+      justify-content: center;
+      gap: 10px;
+      grid-template-columns: repeat(3, 50px);
+    }
     .check {
       input {
         overflow: hidden;
@@ -334,8 +341,26 @@ a {
         cursor: pointer;
         border-radius: 50%;
         &.active {
-          border: 4px solid yellow;
+          border: 3px solid #dc143c;
         }
+      }
+    }
+    .reset {
+      margin-top: 15px;
+      width: 100%;
+      max-width: 200px;
+      background-color: white;
+      border: none;
+      margin: 0 auto;
+      border: 1px solid black;
+      border-radius: 0px;
+      padding: 5px 10px;
+      font-size: 16px;
+      outline: none;
+      cursor: pointer;
+      &:hover {
+        background-color: black;
+        color: white;
       }
     }
     .categors {
@@ -364,12 +389,12 @@ a {
     width: 100%;
     display: grid;
     gap: 25px;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 270px));
+
     .product {
       width: 100%;
       max-width: 270px;
-
+      border: 1px solid black;
       min-height: 400px;
       height: 100%;
       border-radius: 16px;
@@ -687,6 +712,19 @@ a {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    .not_comment {
+      position: relative;
+      width: 100%;
+
+      height: 100%;
+      h1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
     .comment_block {
       display: flex;
       border: 1px solid black;
@@ -761,12 +799,13 @@ a {
   align-items: center;
   .close {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 10px;
+    right: 10px;
     cursor: pointer;
     width: 40px;
     height: 40px;
     display: flex;
+    z-index: 10;
     justify-content: center;
     align-items: center;
     background-color: white;
@@ -832,9 +871,10 @@ a {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   .close {
+    z-index: 10;
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 10px;
+    right: 10px;
     cursor: pointer;
     width: 40px;
     height: 40px;
@@ -850,6 +890,7 @@ a {
     }
   }
   .froms {
+    margin: 0 10px;
     border-radius: 5px;
     overflow: hidden;
     background-color: #f3f3f3;
@@ -1017,11 +1058,11 @@ a {
     .products {
       .product {
         width: 100%;
+
         max-width: 270px;
         border: 1px solid black;
         padding: 10px;
         height: 280px;
-
         border-radius: 16px;
         overflow: hidden;
         position: relative;
@@ -1041,11 +1082,9 @@ a {
         .choise_product {
           position: absolute;
           opacity: 0;
-
           width: 100%;
           height: 100%;
           top: 50%;
-
           left: 50%;
           background-color: rgba(0, 0, 0, 0.5);
           transform: translate(-50%, -50%);
@@ -1096,4 +1135,324 @@ a {
 
 .slick-arrow {
   background-color: red;
+}
+.footer {
+  margin-top: 100px;
+  padding: 30px 0;
+  background-color: black;
+  color: white;
+  width: 100%;
+  box-shadow: 0px 0px -10px 10px gray;
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    .logo {
+      font-size: 25px;
+    }
+    align-items: center;
+    a {
+      color: white;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contacts {
+      ul {
+        li {
+          a {
+            display: flex;
+            color: white;
+            align-items: center;
+            gap: 10px;
+            img {
+              width: 40px;
+              height: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 710px) {
+  .empty {
+    margin: 20px auto;
+    width: 100%;
+  }
+  .bas {
+    justify-content: center;
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    flex-direction: column-reverse;
+  }
+  .wrapper .title_list {
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    margin: 0 auto;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .wrapper .basket .product {
+    max-width: 550px;
+    border: 1px solid black;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    gap: 50px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 610px) {
+  .bas {
+    justify-content: center;
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    flex-direction: column-reverse;
+  }
+  .title {
+    text-align: left;
+    margin-top: 0px;
+    padding: 20px 0;
+  }
+  .product_fulss {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+  .product_fulss .block_img {
+    width: 100%;
+
+    margin: 0 auto;
+    min-height: 200px;
+  }
+  .products__input {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+  }
+  .products__input .products .product {
+    margin: 0 auto;
+  }
+
+  .research .sort select {
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    background-color: white;
+    color: black;
+    display: flex;
+    margin: 10px;
+    border: 1px solid black;
+    padding: 5px;
+  }
+  .comment .commets_main {
+    margin: 20px auto;
+    width: 100%;
+    height: 450px;
+    border: 2px solid black;
+    padding: 10px;
+    overflow: auto;
+    display: flex;
+
+    flex-direction: column;
+    gap: 10px;
+  }
+  .comment .inputs_register {
+    display: flex;
+    margin: 20px auto;
+    width: 100%;
+    gap: 20px;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+  }
+  .comment .inputs_register input {
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid black;
+    outline: none;
+    width: 70%;
+  }
+  .comment .inputs_register button {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 0px;
+    font-size: 20px;
+    outline: none;
+    width: 30%;
+    cursor: pointer;
+  }
+  .comment .inputs_register span {
+    display: none;
+  }
+  .comment .commets_main .comment_block .buttons {
+    padding-right: 5px;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+  }
+  .comment_block_img {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 20px;
+    font-weight: bold;
+    flex-direction: column;
+  }
+  .comment .commets_main .comment_block {
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    max-width: 100%;
+  }
+  .Date {
+    display: none;
+  }
+  .comment .inputs_register button:nth-child(1) {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 0px;
+    font-size: 20px;
+
+    outline: none;
+    width: 40%;
+    cursor: pointer;
+  }
+}
+@media (max-width: 535px) {
+  .wrapper .basket .product {
+    max-width: 550px;
+    border: 1px solid black;
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    gap: 10px;
+    margin: 0 auto;
+  }
+  .wrapper .basket .product .buttons_add_del {
+    display: flex;
+    max-width: 200px;
+    margin-left: auto;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+  }
+}
+@media (max-width: 380px) {
+  .footer .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .comment .commets_main .comment_block {
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    max-width: 100%;
+  }
+  .comment_block_img {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 20px;
+    font-weight: bold;
+    flex-direction: row;
+  }
+  .comment .commets_main .comment_block .buttons {
+    padding-right: 5px;
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    padding: 5px;
+  }
+  .comment .commets_main .comment_block {
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    max-width: 100%;
+  }
+}
+@media (max-width: 350px) {
+  .form_pages:nth-child(1) {
+    padding: 20px 10px;
+    height: 100%;
+    background-color: white;
+    border: 1px solid black;
+    text-align: center;
+    overflow: scroll;
+    display: flex;
+    gap: 5px;
+    height: 280px;
+    overflow: auto;
+    flex-direction: column;
+    .block {
+      width: 100%;
+
+      &.choise {
+        width: 100%;
+        max-height: none;
+        overflow: hidden;
+        flex: 1 0 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  }
+  .onsova_form .froms {
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #f3f3f3;
+    width: 100%;
+    margin: 0 10px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+}
+
+.Slider {
+  margin: 10px auto;
+  width: 100%;
+  max-width: 100%;
+  .slider {
+    width: 100%;
+
+    height: 440px;
+    img {
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      height: 100%;
+    }
+  }
 }
